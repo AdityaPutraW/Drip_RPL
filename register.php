@@ -9,7 +9,6 @@ if (isset($_POST['register'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // Cek apakah username sudah ada
     $query = "SELECT * FROM users WHERE username = :username";
     $stmt = $conn->prepare($query);
     $stmt->bindParam(':username', $username);
@@ -23,7 +22,7 @@ if (isset($_POST['register'])) {
         $query = "INSERT INTO users (username, password) VALUES (:username, :password)";
         $stmt = $conn->prepare($query);
         $stmt->bindParam(':username', $username);
-        $stmt->bindParam(':password', $password); // Untuk password plain text
+        $stmt->bindParam(':password', $password); 
         if ($stmt->execute()) {
             $success = "Akun berhasil dibuat! Silakan login.";
         } else {
