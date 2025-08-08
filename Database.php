@@ -1,6 +1,6 @@
 <?php
 $host = 'localhost';
-$db   = 'drip_db'; // ganti dengan nama database Anda
+$db   = 'drip_db';
 $user = 'root';
 $pass = '';
 $charset = 'utf8mb4';
