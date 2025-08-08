@@ -1,38 +1,38 @@
 <?php
-include 'Database.php'; // Include the database connection file
+include 'Database.php'; 
 
-session_start(); // Start the session
+session_start(); 
 
-$error = ''; // Initialize error message
+$error = ''; 
 
-// Check if the form is submitted
+
 if (isset($_POST['login'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // Prepare and execute the query to check user credentials
+    
     try {
         $query = "SELECT * FROM users WHERE username = :username";
         $stmt = $conn->prepare($query);
         $stmt->bindParam(':username', $username);
         $stmt->execute();
 
-        // Check if any user is found
-        $user = $stmt->fetch(PDO::FETCH_ASSOC); // Fetch user data
-        if ($user && $password == $user['password']) { // Untuk password plain text
-            $_SESSION['login'] = true; // Set session variable
-            header("Location: indeks.php"); // Redirect to the main page
+       
+        $user = $stmt->fetch(PDO::FETCH_ASSOC); 
+        if ($user && $password == $user['password']) { 
+            $_SESSION['login'] = true; 
+            header("Location: indeks.php"); 
             exit;
         } else {
-            $error = "Username atau password salah!"; // Set error message
+            $error = "Username atau password salah!"; 
         }
     } catch (PDOException $e) {
-        $error = "Error: " . $e->getMessage(); // Handle any errors
+        $error = "Error: " . $e->getMessage(); 
     }
 }
 
-// Close the connection
-$conn = null; // For PDO, setting the connection to null closes it
+
+$conn = null; 
 ?>
 
 <!DOCTYPE html>
